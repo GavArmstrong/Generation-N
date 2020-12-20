@@ -1,6 +1,6 @@
-# Generation-S
+# Generation-N
 
-Generation S is a PC game motivated by biological agent-based survivor models.
+Generation N is a PC game motivated by biological agent-based survivor models.
 
 Written in HTML5, CSS3, and JavaScript.
 
