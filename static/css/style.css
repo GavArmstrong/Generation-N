@@ -1,0 +1,8 @@
+/* My personal style file for the Generation N project. */
+
+.myCanvas {
+  background: #eee;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
