@@ -25,6 +25,8 @@ cntxt.stroke();
 cntxt.closePath();
 
 // Defining a draw loop for a moving ball.
+
+// The ball starting position.
 var x = canvas.width/2;
 var y = canvas.height-30;
 
@@ -33,6 +35,7 @@ var dy = -2;
 
 var ballRadius = 10;
 
+// The function for drawing the ball.
 function drawBall() {
   cntxt.beginPath();
   cntxt.arc(x, y, ballRadius, 0, Math.PI*2);
@@ -41,11 +44,20 @@ function drawBall() {
   cntxt.closePath();
 }
 
+// Rendering the ball after each iteration.
 function draw() {
   cntxt.clearRect(0, 0, canvas.width, canvas.height);
   drawBall();
   x += dx;
   y += dy;
+
+  if (y + dy < 0 || y + dy > canvas.height) {
+    dy = -dy;
+  }
+
+  if (x + dx < 0 || x + dx > canvas.width) {
+    dx = -dx;
+  }
 }
 
 setInterval(draw, 10)
