@@ -3,29 +3,9 @@ var cntxt = canvas.getContext("2d");
 
 console.log(cntxt);
 
-// Adding a red square to the canvas.
-cntxt.beginPath();
-cntxt.rect(20, 40, 50, 50);
-cntxt.fillStyle = "#FF0000";
-cntxt.fill();
-cntxt.closePath();
+// A simple ball and paddle game.
 
-// Adding a green circle.
-cntxt.beginPath();
-cntxt.arc(240, 160, 20, 0, Math.PI*2, false);
-cntxt.fillStyle = "green";
-cntxt.fill();
-cntxt.closePath();
-
-// An empty purple rectangle.
-cntxt.beginPath();
-cntxt.rect(160, 10, 100, 40);
-cntxt.strokeStyle = "rgba(0, 0, 255, 0.5)";
-cntxt.stroke();
-cntxt.closePath();
-
-// Defining a draw loop for a moving ball.
-
+// VARIABLES.
 // The ball starting position.
 var x = canvas.width/2;
 var y = canvas.height-30;
@@ -34,6 +14,15 @@ var dx = 2;
 var dy = -2;
 
 var ballRadius = 10;
+
+var paddleHeight = 75;
+var paddleWidth = 10;
+var paddleY = (canvas.height - paddleHeight) / 2;
+
+var upPressed = false;
+var downPressed = false;
+
+var interval = setInterval(draw, 10);
 
 // The function for drawing the ball.
 function drawBall() {
@@ -44,10 +33,42 @@ function drawBall() {
   cntxt.closePath();
 }
 
-// Rendering the ball after each iteration.
+// The function for drawing the paddle.
+function drawPaddle() {
+  cntxt.beginPath();
+  cntxt.rect(paddleWidth - paddleWidth, paddleY, paddleWidth, paddleHeight);
+  cntxt.fillStyle = "#0095DD";
+  cntxt.fill();
+  cntxt.closePath();
+}
+
+// Key handlers.
+function keyDownHandler(e) {
+  if (e.key == "Up" || e.key == "ArrowUp") {
+    upPressed = true;
+  }
+  else if (e.key == "Down" || e.key == "ArrowDown") {
+    downPressed = true;
+  }
+}
+
+function keyUpHandler(e) {
+  if (e.key == "Up" || e.key == "ArrowUp") {
+    upPressed = false;
+  }
+  else if (e.key == "Down" || e.key == "ArrowDown") {
+    downPressed = false;
+  }
+}
+
+// Rendering the objects.
 function draw() {
   cntxt.clearRect(0, 0, canvas.width, canvas.height);
+
   drawBall();
+  drawPaddle();
+
+  // Ball.
   x += dx;
   y += dy;
 
@@ -55,9 +76,37 @@ function draw() {
     dy = -dy;
   }
 
-  if (x + dx < 0 || x + dx > canvas.width) {
+  if (x + dx > canvas.width) {
     dx = -dx;
+  } else if (x + dx < 0) {
+    if (y < paddleY + paddleHeight && y > paddleY) {
+      dx = -dx;
+    } else {
+//      alert("Game Over");
+      document.location.reload();
+      clearInterval(interval);
+    }
+  }
+
+
+
+  // Paddle.
+  if (upPressed) {
+    paddleY -= 7;
+    if (paddleY < 0) {
+      paddleY = 0;
+    }
+  }
+  if (downPressed) {
+    paddleY += 7;
+    if (paddleY + paddleHeight > canvas.height) {
+      paddleY = canvas.height - paddleHeight;
+    }
   }
 }
+
+// Event listeners.
+document.addEventListener("keydown", keyDownHandler, false)
+document.addEventListener("keyup", keyUpHandler, false)
 
 setInterval(draw, 10)
