@@ -68,7 +68,7 @@ function draw() {
   drawBall();
   drawPaddle();
 
-  // Ball.
+  // Ball movement.
   x += dx;
   y += dy;
 
@@ -90,7 +90,7 @@ function draw() {
 
 
 
-  // Paddle.
+  // Paddle movement.
   if (upPressed) {
     paddleY -= 7;
     if (paddleY < 0) {
