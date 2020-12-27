@@ -10,21 +10,14 @@ console.log(cntxt);
 var x = canvas.width/2;
 var y = canvas.height-30;
 
-var dx = 2;
-var dy = -2;
-
 var ballRadius = 10;
 
-var paddleHeight = 75;
-var paddleWidth = 10;
-var paddleY = (canvas.height - paddleHeight) / 2;
-
-var upPressed = false;
-var downPressed = false;
+var centerX = canvas.width/2;
+var centerY = canvas.height/2;
 
 var interval = setInterval(draw, 10);
 
-// The function for drawing the ball.
+// The function for drawing the balls.
 function drawBall() {
   cntxt.beginPath();
   cntxt.arc(x, y, ballRadius, 0, Math.PI*2);
