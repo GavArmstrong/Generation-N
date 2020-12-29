@@ -10,7 +10,8 @@ var ballRadius = 10;
 
 var circleRadius = canvas.height/2.5;
 
-var numBalls = 10;
+var player1Balls = 5;
+var player2Balls = 5;
 
 var lineWidth = 6;
 
@@ -22,6 +23,7 @@ var y = centerY;
 
 var pointX = [];
 var pointY = [];
+var pointScore = [];
 
 var pointOne = 0;
 var pointTwo = 0;
@@ -41,15 +43,23 @@ function randomInt(min, max) {
 function drawBall() {
   ctx.beginPath();
   ctx.arc(x, y, ballRadius, 0, Math.PI*2);
-  ctx.fillStyle = ballColor1;
+  ctx.fillStyle = ballColor;
   ctx.fill();
   ctx.closePath();
 }
 
+// Initialize the scores for the balls.
+for (var i = 0; i < player1Balls; i++) {
+  pointScore.push(0);
+}
+for (var j = 0; j < player2Balls; j++) {
+  pointScore.push(1);
+}
+
 function generatePoints() {
-  for (var i = 0; i < numBalls; i++) {
-    x = centerX + circleRadius * Math.cos(i * 2 * Math.PI / numBalls);
-    y = centerY + circleRadius * Math.sin(i * 2 * Math.PI / numBalls);
+  for (var i = 0; i < player1Balls + player2Balls; i++) {
+    x = centerX + circleRadius * Math.cos(i * 2 * Math.PI / (player1Balls + player2Balls));
+    y = centerY + circleRadius * Math.sin(i * 2 * Math.PI / (player1Balls + player2Balls));
     pointX.push(x);
     pointY.push(y);
   }
@@ -57,10 +67,10 @@ function generatePoints() {
 
 // The function for drawing lines between randomly selected points.
 function drawRandomLine() {
-  pointOne = randomInt(0, numBalls - 1);
+  pointOne = randomInt(0, player1Balls + player2Balls - 1);
 
-  if (numBalls > 1) {
-    pointTwo = randomInt(pointOne + 1, numBalls);
+  if (player1Balls + player2Balls > 1) {
+    pointTwo = randomInt(pointOne + 1, player1Balls + player2Balls);
   }
 
   // The line joining the points.
@@ -98,7 +108,12 @@ function draw() {
   for (var i = 0; i < pointX.length; i++) {
     x = pointX[i];
     y = pointY[i];
-    drawBall();
+    if (pointScore[i]==0) {
+      drawBall(ballColor=ballColor1);
+    }
+    else {
+      drawBall(ballColor=ballColor2);
+    }
   }
 
   drawTwoPoints();
