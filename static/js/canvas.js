@@ -85,13 +85,13 @@ function drawRandomLine() {
 
 function drawTwoPoints() {
   ctx.beginPath();
-  ctx.arc(pointX[pointOne], pointY[pointOne], 1.25 * ballRadius, 0, Math.PI*2);
+  ctx.arc(pointX[pointOne], pointY[pointOne], 1.45 * ballRadius, 0, Math.PI*2);
   ctx.fillStyle = lineColor;
   ctx.fill();
   ctx.closePath();
 
   ctx.beginPath();
-  ctx.arc(pointX[pointTwo], pointY[pointTwo], 1.25 * ballRadius, 0, Math.PI*2);
+  ctx.arc(pointX[pointTwo], pointY[pointTwo], 1.45 * ballRadius, 0, Math.PI*2);
   ctx.fillStyle = lineColor;
   ctx.fill();
   ctx.closePath();
@@ -105,6 +105,9 @@ function draw() {
 
   drawRandomLine();
 
+  drawTwoPoints();
+
+
   for (var i = 0; i < pointX.length; i++) {
     x = pointX[i];
     y = pointY[i];
@@ -115,8 +118,6 @@ function draw() {
       drawBall(ballColor=ballColor2);
     }
   }
-
-  drawTwoPoints();
 
 }
 
