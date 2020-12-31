@@ -11,7 +11,7 @@ var ballRadius = 10;
 var circleRadius = canvas.height/2.5;
 
 var player1Balls = 5;
-var player2Balls = 5;
+var player2Balls = 6;
 
 var lineWidth = 6;
 
@@ -96,7 +96,6 @@ function drawTwoPoints() {
   ctx.fill();
   ctx.closePath();
 }
-
 
 // Rendering the objects.
 function draw() {
