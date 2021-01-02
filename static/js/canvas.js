@@ -30,7 +30,7 @@ var pointTwo = 0;
 
 var ballColor1 = "#60B810";
 var ballColor2 = "#3EA9FB";
-var lineColor = "#E767EC";
+var lineColor = "#E68631";
 
 // Get a random integer. Min is included, Max is not.
 function randomInt(min, max) {
