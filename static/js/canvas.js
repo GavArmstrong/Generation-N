@@ -28,9 +28,9 @@ var pointScore = [];
 var pointOne = 0;
 var pointTwo = 0;
 
-var ballColor1 = "#619CFB";
-var ballColor2 = "#EC746B";
-var lineColor = "#60BB3B";
+var ballColor1 = "#60B810";
+var ballColor2 = "#3EA9FB";
+var lineColor = "#E767EC";
 
 // Get a random integer. Min is included, Max is not.
 function randomInt(min, max) {
